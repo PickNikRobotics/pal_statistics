@@ -70,8 +70,8 @@ public:
     @brief fills message with the last captured values.
     */
   void fillMsg(
-    pal_statistics_msgs::msg::StatisticsNames & names,
-    pal_statistics_msgs::msg::StatisticsValues & value);
+    plotjuggler_msgs::msg::StatisticsNames & names,
+    plotjuggler_msgs::msg::StatisticsValues & value);
 
   /**
    * @brief smartFillMsg Attempts to minimize the amount of string copies
@@ -82,8 +82,8 @@ public:
    * only update the values.
    */
   bool smartFillMsg(
-    pal_statistics_msgs::msg::StatisticsNames & names,
-    pal_statistics_msgs::msg::StatisticsValues & values);
+    plotjuggler_msgs::msg::StatisticsNames & names,
+    plotjuggler_msgs::msg::StatisticsValues & values);
   /**
    * @return the number of variables registered
    */

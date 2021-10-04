@@ -39,8 +39,8 @@
 #include <vector>
 
 #include "pal_statistics_msgs/msg/statistics.hpp"
-#include "pal_statistics_msgs/msg/statistics_names.hpp"
-#include "pal_statistics_msgs/msg/statistics_values.hpp"
+#include "plotjuggler_msgs/msg/statistics_names.hpp"
+#include "plotjuggler_msgs/msg/statistics_values.hpp"
 #include "pal_statistics/static_circular_buffer.hpp"
 #include "rclcpp/rclcpp.hpp"
 

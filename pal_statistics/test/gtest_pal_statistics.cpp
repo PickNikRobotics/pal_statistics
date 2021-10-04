@@ -64,11 +64,11 @@ public:
     sub_ = node_->create_subscription<pal_statistics_msgs::msg::Statistics>(
       std::string(DEFAULT_STATISTICS_TOPIC) + "/full", 1,
       std::bind(&PalStatisticsTest::fullTopicCb, this, std::placeholders::_1));
-    names_sub_ = node_->create_subscription<pal_statistics_msgs::msg::StatisticsNames>(
+    names_sub_ = node_->create_subscription<plotjuggler_msgs::msg::StatisticsNames>(
       std::string(DEFAULT_STATISTICS_TOPIC) + "/names", 1,
       std::bind(&PalStatisticsTest::namesTopicCb, this, std::placeholders::_1));
     values_sub_ =
-      node_->create_subscription<pal_statistics_msgs::msg::StatisticsValues>(
+      node_->create_subscription<plotjuggler_msgs::msg::StatisticsValues>(
       std::string(
         DEFAULT_STATISTICS_TOPIC) + "/values", 1,
       std::bind(&PalStatisticsTest::valuesTopicCb, this, std::placeholders::_1));
@@ -78,11 +78,11 @@ public:
   {
     last_msg_ = msg;
   }
-  void namesTopicCb(const pal_statistics_msgs::msg::StatisticsNames::SharedPtr msg)
+  void namesTopicCb(const plotjuggler_msgs::msg::StatisticsNames::SharedPtr msg)
   {
     last_names_msg_ = msg;
   }
-  void valuesTopicCb(const pal_statistics_msgs::msg::StatisticsValues::SharedPtr msg)
+  void valuesTopicCb(const plotjuggler_msgs::msg::StatisticsValues::SharedPtr msg)
   {
     last_values_msg_ = msg;
   }
@@ -115,12 +115,12 @@ protected:
   rclcpp::Executor::SharedPtr executor_;
 
   rclcpp::Subscription<pal_statistics_msgs::msg::Statistics>::SharedPtr sub_;
-  rclcpp::Subscription<pal_statistics_msgs::msg::StatisticsNames>::SharedPtr names_sub_;
-  rclcpp::Subscription<pal_statistics_msgs::msg::StatisticsValues>::SharedPtr values_sub_;
+  rclcpp::Subscription<plotjuggler_msgs::msg::StatisticsNames>::SharedPtr names_sub_;
+  rclcpp::Subscription<plotjuggler_msgs::msg::StatisticsValues>::SharedPtr values_sub_;
 
   pal_statistics_msgs::msg::Statistics::ConstSharedPtr last_msg_;
-  pal_statistics_msgs::msg::StatisticsNames::ConstSharedPtr last_names_msg_;
-  pal_statistics_msgs::msg::StatisticsValues::ConstSharedPtr last_values_msg_;
+  plotjuggler_msgs::msg::StatisticsNames::ConstSharedPtr last_names_msg_;
+  plotjuggler_msgs::msg::StatisticsValues::ConstSharedPtr last_values_msg_;
 };
 
 
@@ -533,9 +533,9 @@ TEST_F(PalStatisticsTest, stressAsync)
 
   rclcpp::SubscriptionOptions sub_opts;
   sub_opts.callback_group = cb_group;
-  auto topic_sub = node_->create_subscription<pal_statistics_msgs::msg::Statistics>(
+  auto topic_sub = node_->create_subscription<plotjuggler_msgs::msg::Statistics>(
     std::string(DEFAULT_STATISTICS_TOPIC) + "/full", rclcpp::QoS(rclcpp::KeepAll()),
-    [&](const pal_statistics_msgs::msg::Statistics::SharedPtr) {received_messages++;}, sub_opts);
+    [&](const plotjuggler_msgs::msg::Statistics::SharedPtr) {received_messages++;}, sub_opts);
 
   auto future_handle = std::async(
     std::launch::async, [&group_executor]() -> void {

@@ -63,10 +63,10 @@ StatisticsRegistry::StatisticsRegistry(
   names_qos.reliable();
   names_qos.transient_local();  // latch
 
-  pub_names_ = node_->create_publisher<pal_statistics_msgs::msg::StatisticsNames>(
+  pub_names_ = node_->create_publisher<plotjuggler_msgs::msg::StatisticsNames>(
     topic + "/names",
     names_qos);
-  pub_values_ = node_->create_publisher<pal_statistics_msgs::msg::StatisticsValues>(
+  pub_values_ = node_->create_publisher<plotjuggler_msgs::msg::StatisticsValues>(
     topic + "/values", rclcpp::QoS(rclcpp::KeepAll()));
   publish_async_attempts_ = 0;
   publish_async_failures_ = 0;
@@ -257,8 +257,8 @@ pal_statistics_msgs::msg::Statistics StatisticsRegistry::createMsg()
   handlePendingDisables(data_lock);
   registration_list_->doUpdate();
   GeneratedStatistics gen_sts;
-  pal_statistics_msgs::msg::StatisticsNames names;
-  pal_statistics_msgs::msg::StatisticsValues values;
+  plotjuggler_msgs::msg::StatisticsNames names;
+  plotjuggler_msgs::msg::StatisticsValues values;
 
   updateMsg(names, values, false);
   gen_sts.update(names, values);
@@ -276,8 +276,8 @@ bool StatisticsRegistry::disable(const IdType & id)
 }
 
 bool StatisticsRegistry::updateMsg(
-  pal_statistics_msgs::msg::StatisticsNames & names,
-  pal_statistics_msgs::msg::StatisticsValues & values,
+  plotjuggler_msgs::msg::StatisticsNames & names,
+  plotjuggler_msgs::msg::StatisticsValues & values,
   bool smart_fill)
 {
   if (smart_fill) {
@@ -312,8 +312,8 @@ void StatisticsRegistry::publisherThreadCycle()
 }
 
 void StatisticsRegistry::GeneratedStatistics::update(
-  const pal_statistics_msgs::msg::StatisticsNames & names,
-  const pal_statistics_msgs::msg::StatisticsValues & values)
+  const plotjuggler_msgs::msg::StatisticsNames & names,
+  const plotjuggler_msgs::msg::StatisticsValues & values)
 {
   msg_.header = values.header;
   if (last_names_version_ == names.names_version && !msg_.statistics.empty()) {

@@ -37,8 +37,8 @@
 #include "pal_statistics/pal_statistics_utils.hpp"
 
 #include "pal_statistics_msgs/msg/statistics.hpp"
-#include "pal_statistics_msgs/msg/statistics_names.hpp"
-#include "pal_statistics_msgs/msg/statistics_values.hpp"
+#include "plotjuggler_msgs/msg/statistics_names.hpp"
+#include "plotjuggler_msgs/msg/statistics_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
 class PalStatisticsTest_stressAsync_Test;
@@ -173,8 +173,8 @@ private:
    * @return true if a smartfill was performed
    */
   bool updateMsg(
-    pal_statistics_msgs::msg::StatisticsNames & names,
-    pal_statistics_msgs::msg::StatisticsValues & values, bool smart_fill = false);
+    plotjuggler_msgs::msg::StatisticsNames & names,
+    plotjuggler_msgs::msg::StatisticsValues & values, bool smart_fill = false);
 
   void publisherThreadCycle();
 
@@ -220,8 +220,8 @@ private:
   // To avoid deadlocks, should always be acquired after data_mutex_
   std::mutex pub_mutex_;
   rclcpp::Publisher<pal_statistics_msgs::msg::Statistics>::SharedPtr pub_;
-  rclcpp::Publisher<pal_statistics_msgs::msg::StatisticsNames>::SharedPtr pub_names_;
-  rclcpp::Publisher<pal_statistics_msgs::msg::StatisticsValues>::SharedPtr pub_values_;
+  rclcpp::Publisher<plotjuggler_msgs::msg::StatisticsNames>::SharedPtr pub_names_;
+  rclcpp::Publisher<plotjuggler_msgs::msg::StatisticsValues>::SharedPtr pub_values_;
 
   std::atomic<bool> is_data_ready_;
   std::atomic<bool> interrupt_thread_;
@@ -234,16 +234,16 @@ private:
     {
     }
     void update(
-      const pal_statistics_msgs::msg::StatisticsNames & names,
-      const pal_statistics_msgs::msg::StatisticsValues & values);
+      const plotjuggler_msgs::msg::StatisticsNames & names,
+      const plotjuggler_msgs::msg::StatisticsValues & values);
 
     /// This message is generated using an updated StatiticsNames and StatisticsValues
     pal_statistics_msgs::msg::Statistics msg_;
     unsigned int last_names_version_;
   };
 
-  pal_statistics_msgs::msg::StatisticsNames names_msg_;
-  pal_statistics_msgs::msg::StatisticsValues values_msg_;
+  plotjuggler_msgs::msg::StatisticsNames names_msg_;
+  plotjuggler_msgs::msg::StatisticsValues values_msg_;
   GeneratedStatistics generated_statistics_;
   // Internal stats
   unsigned int publish_async_attempts_;

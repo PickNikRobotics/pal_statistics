@@ -9,12 +9,15 @@ find_package(ament_cmake_auto REQUIRED)
 
 # PAL Robotics stricter build flags, other developers should not worry about this
 find_package(ament_cmake_pal QUIET)
+find_package(plotjuggler_msgs REQUIRED)
 
 ament_auto_find_build_dependencies()
 
 ament_auto_add_library(${PROJECT_NAME} SHARED 
 	src/pal_statistics_utils.cpp src/pal_statistics.cpp
 	src/pal_statistics_macros.cpp src/registration_list.cpp)
+
+ament_target_dependencies( ${PROJECT_NAME} plotjuggler_msgs)
 
 # ##############################################################################
 # Testing ##

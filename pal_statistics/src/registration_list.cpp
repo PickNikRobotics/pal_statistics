@@ -130,8 +130,8 @@ void RegistrationList::doUpdate()
 }
 
 void RegistrationList::fillMsg(
-  pal_statistics_msgs::msg::StatisticsNames & names,
-  pal_statistics_msgs::msg::StatisticsValues & value)
+  plotjuggler_msgs::msg::StatisticsNames & names,
+  plotjuggler_msgs::msg::StatisticsValues & value)
 {
   names.names.clear();
   names.names.resize(last_values_buffer_.front().first.names.size());
@@ -154,8 +154,8 @@ void RegistrationList::fillMsg(
 }
 
 bool RegistrationList::smartFillMsg(
-  pal_statistics_msgs::msg::StatisticsNames & names,
-  pal_statistics_msgs::msg::StatisticsValues & values)
+  plotjuggler_msgs::msg::StatisticsNames & names,
+  plotjuggler_msgs::msg::StatisticsValues & values)
 {
   if (names.names.empty() || registrations_changed_) {
     fillMsg(names, values);
